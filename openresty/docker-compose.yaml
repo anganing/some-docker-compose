@@ -1,6 +1,7 @@
 services:
   openresty:
     image: openresty/openresty:1.27.1.2-alpine
+    pull_policy: never  # 可选，不自动拉取镜像省流量
     container_name: openresty
     restart: always
     ports:

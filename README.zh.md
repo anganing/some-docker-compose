@@ -10,6 +10,7 @@
 
 - **Redis**: 内存数据结构存储，用作数据库、缓存和消息代理。
 - **OpenResty**: 基于 NGINX 和 LuaJIT 的动态 Web 平台。
+- **MySQL**: 关系型数据库管理系统。
 
 ## 使用方法
 
@@ -19,6 +20,7 @@
 some-docker-compose/
 ├── redis/              # Redis 服务配置
 ├── openresty/          # OpenResty 服务配置
+├── mysql/              # MySQL 服务配置
 ├── README.md           # 英文文档
 ├── README.zh.md        # 中文文档
 └── .gitignore          # Git 忽略文件

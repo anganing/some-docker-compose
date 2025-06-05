@@ -10,6 +10,7 @@ This project provides ready-to-use Docker Compose configurations for various inf
 
 - **Redis**: In-memory data structure store, used as a database, cache, and message broker.
 - **OpenResty**: A dynamic web platform based on NGINX and LuaJIT.
+- **MySQL**: Relational database management system.
 
 ## Usage
 
@@ -19,6 +20,7 @@ Each service has its own directory with a dedicated Docker Compose file and conf
 some-docker-compose/
 ├── redis/              # Redis service configuration
 ├── openresty/          # OpenResty service configuration
+├── mysql/              # MySQL service configuration
 ├── README.md           # English documentation
 ├── README.zh.md        # Chinese documentation
 └── .gitignore          # Git ignore file
