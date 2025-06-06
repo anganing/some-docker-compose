@@ -4,18 +4,20 @@ services:
     pull_policy: never  # 可选，不自动拉取镜像省流量
     container_name: openresty
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
+    network_mode: host  # 使用主机网络模式，可以通过 localhost 访问宿主机服务
+    # 使用 host 网络模式时，不需要映射端口，因为容器直接使用宿主机端口
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
     volumes:
       - ./conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
       - ./conf.d/default.conf:/etc/nginx/conf.d/default.conf
       - ./logs:/usr/local/openresty/nginx/logs
       - ./html:/usr/local/openresty/nginx/html
       - ./lua:/usr/local/openresty/nginx/lua
-    networks:
-      - openresty-network
-
-networks:
-  openresty-network:
-    driver: bridge 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s

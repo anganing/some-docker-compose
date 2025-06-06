@@ -2,14 +2,16 @@ services:
   mysql:
     image: mysql:8.0.32  # 使用稳定的 8.0 版本（8.4 版本起不来）
     container_name: mysql-server
-    restart: unless-stopped
-    # pull_policy: never  # 可选，不自动拉取镜像省流量
+    restart: always
+    pull_policy: never  # 可选，不自动拉取镜像省流量
     environment:
       - MYSQL_ROOT_PASSWORD=iboot@2025  # root密码
       - MYSQL_DATABASE=ibootdb  # 默认创建的数据库名
       - TZ=Asia/Shanghai  # 时区设置
-    ports:
-      - "3306:3306"  # 端口映射
+    network_mode: host  # 使用主机网络模式，可以通过 localhost 访问宿主机服务
+    # 使用 host 网络模式时，不需要映射端口，因为容器直接使用宿主机端口
+    #ports:
+    #  - "3306:3306"  # 端口映射
     volumes:
       - ./conf/my.cnf:/etc/mysql/conf.d/my.cnf  # 配置文件挂载
       - ./data:/var/lib/mysql  # 数据目录挂载

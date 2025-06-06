@@ -4,10 +4,18 @@ services:
     pull_policy: never  # 可选，不自动拉取镜像省流量
     container_name: redis-server  # 自定义容器名
     restart: always  # 开机自启核心配置
-    ports:
-      - "6379:6379"  # 映射宿主机6379→容器6379
+    network_mode: host  # 使用主机网络模式，可以通过 localhost 访问宿主机服务
+    # 使用 host 网络模式时，不需要映射端口，因为容器直接使用宿主机端口
+    #ports:
+    #  - "6379:6379"  # 映射宿主机6379→容器6379
     volumes:
       - ./conf/redis.conf:/usr/local/etc/redis/redis.conf  # 挂载自定义配置
       - ./data:/data  # 持久化数据目录
       - ./logs:/var/log/redis  # 日志目录（可选）
     command: redis-server /usr/local/etc/redis/redis.conf  # 加载自定义配置
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
