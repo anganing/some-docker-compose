@@ -20,3 +20,5 @@ nbproject/
 *.bak
 *.tmp
 .DS_Store
+*.log
+*.pid

@@ -1,0 +1,12 @@
+services:
+  iboot-studio:
+    image: ibootio/iboot-studio:latest
+    pull_policy: never  # 可选，不自动拉取镜像省流量
+    container_name: iboot-studio
+    restart: always
+    network_mode: host  # 使用主机网络模式，可以通过 localhost 访问宿主机服务
+    # 使用 host 网络模式时，不需要映射端口，因为容器直接使用宿主机端口
+    ports:
+      - "18080:18080"
+    volumes:
+      - ./database/iboot.db:/app/database/iboot.db

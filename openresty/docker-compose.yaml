@@ -16,7 +16,7 @@ services:
       - ./html:/usr/local/openresty/nginx/html
       - ./lua:/usr/local/openresty/nginx/lua
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost/"]
+      test: ["CMD", "sh", "-c", "timeout 1 bash -c '>/dev/tcp/localhost/80'"]
       interval: 10s
       timeout: 5s
       retries: 3
